@@ -1,11 +1,12 @@
-import { baseData } from './seed';
-import { DataTypes, Sequelize } from 'sequelize';
+import { baseData } from "./seed";
+import { DataTypes, Sequelize, Op } from "sequelize";
+import { SearchTransaction } from "./types";
 
 let TransactionTable;
-const filepath = '.data/transactions.db';
+const filepath = ".data/transactions.db";
 
-export const dbConnection = new Sequelize('database', '', '', {
-  dialect: 'sqlite',
+export const dbConnection = new Sequelize("database", "", "", {
+  dialect: "sqlite",
   storage: filepath,
   logging: true,
 });
@@ -15,7 +16,7 @@ export const setupDb = async (): Promise<void> => {
     console.log(`SQLite3 Connection has been established successfully.`);
   });
 
-  TransactionTable = dbConnection.define('Transaction', {
+  TransactionTable = dbConnection.define("Transaction", {
     status: DataTypes.STRING,
     amountCents: DataTypes.NUMBER,
     merchantName: DataTypes.STRING,
@@ -54,4 +55,34 @@ export const insertTransaction = async (transaction: Transaction) => {
 
 export const selectTransactions = async () => {
   return await TransactionTable.findAll();
+};
+
+export const search = async ({
+  status,
+  minimum,
+  maximum,
+  merchant,
+  cardNumber,
+}: SearchTransaction) => {
+  return await TransactionTable.findAll({
+    where: {
+      ...(status && {
+        status: {
+          [Op.eq]: status,
+        },
+      }),
+      ...(cardNumber && { cardLast4Digits: { [Op.eq]: cardNumber } }),
+      ...(merchant && { merchantName: { [Op.like]: merchant } }),
+      ...(minimum && {
+        amountCents: {
+          [Op.gt]: minimum,
+        },
+      }),
+      ...(maximum && {
+        amountCents: {
+          [Op.lt]: maximum,
+        },
+      }),
+    },
+  });
 };
