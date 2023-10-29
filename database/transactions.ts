@@ -72,7 +72,7 @@ export const search = async ({
           [Op.eq]: status,
         },
       }),
-      ...(cardNumber && { cardLast4Digits: { [Op.eq]: cardNumber } }),
+      ...(cardNumber && { cardLast4Digits: { [Op.like]: cardNumber } }),
       ...(merchant && { merchantName: { [Op.like]: merchant } }),
       ...(minimumCents && {
         amountCents: {

@@ -30,8 +30,12 @@ const Input = styled.input`
 
 export const Filters = ({
   onChange,
+  cardNumbers,
+  merchants,
 }: {
   onChange: (values: State) => void;
+  cardNumbers: string[];
+  merchants: string[];
 }) => {
   const [state, dispatch] = useSearchTransactionReducer();
 
@@ -98,7 +102,7 @@ export const Filters = ({
       <Column>
         <label>CARD</label>
         <DynamicSelect
-          values={[]}
+          values={cardNumbers}
           onChange={(value) => {
             dispatch({
               type: "CARD_NUMBER_UPDATED",
@@ -110,7 +114,7 @@ export const Filters = ({
       <Column>
         <label>MERCHANT</label>
         <DynamicSelect
-          values={[]}
+          values={merchants}
           onChange={(value) => {
             dispatch({
               type: "MERCHANT_UPDATED",

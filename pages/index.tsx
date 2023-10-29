@@ -1,5 +1,5 @@
 import type { NextPage } from "next";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import TransactionCard from "../components/TransactionCard";
 import { Filters } from "../components/filters";
 import { State } from "../components/filters/state";
@@ -23,11 +23,27 @@ const Home: NextPage = () => {
     searchTransactions(filters);
   }, [filters]);
 
+  const cardNumbers = useMemo(() => {
+    const result = transactions.map((t) => t.cardLast4Digits);
+    const deduped = new Set(result);
+    return [...deduped];
+  }, [transactions]);
+
+  const merchants = useMemo(() => {
+    const result = transactions.map((t) => t.merchantName);
+    const deduped = new Set(result);
+    return [...deduped];
+  }, [transactions]);
+
   return (
     <div className="w-full h-full">
       <div className="m-10">
         <h1 className="text-3xl font-semibold mb-6">Transactions</h1>
-        <Filters onChange={(values: State) => setFilters(values)} />
+        <Filters
+          onChange={(values: State) => setFilters(values)}
+          cardNumbers={cardNumbers}
+          merchants={merchants}
+        />
         <div className="flex flex-col gap-8 mt-10">
           {transactions &&
             transactions.map((transaction: any, index: number) => (

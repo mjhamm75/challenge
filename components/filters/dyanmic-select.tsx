@@ -45,7 +45,7 @@ export const DynamicSelect = ({
       <option value={null}></option>
       <option>Other</option>
       {values.map((v) => (
-        <option value={v}>v</option>
+        <option value={v}>{v}</option>
       ))}
     </Select>
   );
