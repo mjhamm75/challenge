@@ -64,8 +64,9 @@ export const search = async ({
   merchant,
   cardNumber,
 }: SearchTransaction) => {
-  console.log("HERE", minimumCents, maximumCents);
-  return await TransactionTable.findAll({
+  await setupDb();
+
+  const results = await TransactionTable.findAll({
     where: {
       ...(status && {
         status: {
@@ -86,4 +87,6 @@ export const search = async ({
       }),
     },
   });
+
+  return results;
 };

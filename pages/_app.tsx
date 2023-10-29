@@ -1,3 +1,4 @@
+import { ApolloProvider } from "../providers/apollo";
 import "../styles/reset.css";
 import type { AppProps } from "next/app";
 
@@ -8,7 +9,9 @@ function MyApp({ Component, pageProps }: AppProps) {
         padding: "2rem",
       }}
     >
-      <Component {...pageProps} />
+      <ApolloProvider>
+        <Component {...pageProps} />
+      </ApolloProvider>
     </div>
   );
 }

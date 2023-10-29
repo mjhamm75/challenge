@@ -7,7 +7,6 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Transaction[]>
 ) {
-  await setupDb();
   const transactions = await search({
     status:
       req.query.status?.length > 0

@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import TransactionCard from "../components/TransactionCard";
 import { Filters } from "../components/filters";
 import { State } from "../components/filters/state";
+import { useGetTransactions } from "./data";
 
 const H1 = styled.h1`
   font-size: 1.5rem;
@@ -21,23 +22,24 @@ const List = styled.div`
 `;
 
 const Home: NextPage = () => {
-  const [transactions, setTransactions] = useState<any[]>([]);
+  const { transactions, loading, error } = useGetTransactions();
+  // const [transactions, setTransactions] = useState<any[]>([]);
   const [filters, setFilters] = useState<State>({});
-  const searchTransactions = async (searchFilters: State) => {
-    const response = await fetch(
-      `/api/search?status=${searchFilters.status ?? ""}&minAmount=${
-        searchFilters.minAmount ?? ""
-      }&maxAmount=${searchFilters.maxAmount ?? ""}&merchant=${
-        searchFilters.merchant ?? ""
-      }&cardNumber=${searchFilters.cardNumber ?? ""}`
-    );
-    const data = await response.json();
-    setTransactions(data);
-  };
+  // const searchTransactions = async (searchFilters: State) => {
+  //   const response = await fetch(
+  //     `/api/search?status=${searchFilters.status ?? ""}&minAmount=${
+  //       searchFilters.minAmount ?? ""
+  //     }&maxAmount=${searchFilters.maxAmount ?? ""}&merchant=${
+  //       searchFilters.merchant ?? ""
+  //     }&cardNumber=${searchFilters.cardNumber ?? ""}`
+  //   );
+  //   const data = await response.json();
+  //   setTransactions(data);
+  // };
 
-  useEffect(() => {
-    searchTransactions(filters);
-  }, [filters]);
+  // useEffect(() => {
+  //   searchTransactions(filters);
+  // }, [filters]);
 
   const cardNumbers = useMemo(() => {
     const result = transactions.map((t) => t.cardLast4Digits);
