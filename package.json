@@ -8,6 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "test": "jest",
+    "check": "tsc",
     "test-watch": "jest --watchAll"
   },
   "dependencies": {
