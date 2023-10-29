@@ -6,16 +6,22 @@ import { State } from "../components/filters/state";
 
 const Home: NextPage = () => {
   const [transactions, setTransactions] = useState<any[]>([]);
-  const [filters, setFilters] = useState<State>();
-  const fetchTransactions = async () => {
-    const response = await fetch("/api/transactions");
+  const [filters, setFilters] = useState<State>({});
+  const searchTransactions = async (searchFilters: State) => {
+    const response = await fetch(
+      `/api/search?status=${searchFilters.status ?? ""}&minAmount=${
+        searchFilters.minAmount ?? ""
+      }&maxAmount=${searchFilters.maxAmount ?? ""}&merchant=${
+        searchFilters.merchant ?? ""
+      }&cardNumber=${searchFilters.cardNumber ?? ""}`
+    );
     const data = await response.json();
     setTransactions(data);
   };
 
   useEffect(() => {
-    fetchTransactions();
-  }, []);
+    searchTransactions(filters);
+  }, [filters]);
 
   return (
     <div className="w-full h-full">
