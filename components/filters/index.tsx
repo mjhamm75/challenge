@@ -71,7 +71,7 @@ export const Filters = ({
             aria-label="MIN AMOUNT"
             type="number"
             min={0}
-            value={state.minAmount}
+            value={state.maxAmount}
             onChange={(e) => {
               const value = Number(e.target.value);
               if (typeof value === "number") {
