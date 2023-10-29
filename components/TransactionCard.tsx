@@ -7,6 +7,7 @@ const Container = styled.div`
   gap: 1rem;
   background-color: #ffecda;
   padding: 2rem;
+  width: 100%;
 `;
 
 const H1 = styled.h1`

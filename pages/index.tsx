@@ -1,8 +1,24 @@
 import type { NextPage } from "next";
+import styled from "styled-components";
 import { useEffect, useMemo, useState } from "react";
 import TransactionCard from "../components/TransactionCard";
 import { Filters } from "../components/filters";
 import { State } from "../components/filters/state";
+
+const H1 = styled.h1`
+  font-size: 1.5rem;
+`;
+
+const FilterWrapper = styled.div`
+  margin: 1rem 0;
+`;
+
+const List = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+`;
 
 const Home: NextPage = () => {
   const [transactions, setTransactions] = useState<any[]>([]);
@@ -36,21 +52,21 @@ const Home: NextPage = () => {
   }, [transactions]);
 
   return (
-    <div className="w-full h-full">
-      <div className="m-10">
-        <h1 className="text-3xl font-semibold mb-6">Transactions</h1>
+    <div>
+      <H1>Transactions</H1>
+      <FilterWrapper>
         <Filters
           onChange={(values: State) => setFilters(values)}
           cardNumbers={cardNumbers}
           merchants={merchants}
         />
-        <div className="flex flex-col gap-8 mt-10">
-          {transactions &&
-            transactions.map((transaction: any, index: number) => (
-              <TransactionCard key={index} transaction={transaction} />
-            ))}
-        </div>
-      </div>
+      </FilterWrapper>
+      <List>
+        {transactions &&
+          transactions.map((transaction: any, index: number) => (
+            <TransactionCard key={index} transaction={transaction} />
+          ))}
+      </List>
     </div>
   );
 };
