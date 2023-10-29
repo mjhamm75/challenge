@@ -8,6 +8,7 @@ const Input = styled.input`
   padding-left: 8px;
   box-shadow: none;
   outline: none;
+  height: 2rem;
 `;
 
 const Select = styled.select`
@@ -20,7 +21,12 @@ const Select = styled.select`
   margin-right: 2rem;
   appearance: none;
   padding-left: 4px;
-  width: 6rem;
+  width: 100%;
+  height: 2rem;
+
+  @media only screen and (min-width: 931px) {
+    width: 6rem;
+  }
 `;
 
 export const DynamicSelect = ({

@@ -4,9 +4,14 @@ import { DynamicSelect } from "./dyanmic-select";
 import { State, useSearchTransactionReducer } from "./state";
 import { useEffect } from "react";
 
-const Row = styled.div`
+const Flex = styled.div`
   display: flex;
+  flex-direction: column;
   gap: 2rem;
+
+  @media only screen and (min-width: 932px) {
+    flex-direction: row;
+  }
 `;
 
 const Column = styled.div`
@@ -26,6 +31,7 @@ const Input = styled.input`
   background-color: lightgrey;
   box-shadow: none;
   outline: none;
+  height: 2rem;
 `;
 
 export const Filters = ({
@@ -45,7 +51,7 @@ export const Filters = ({
   }, [state]);
 
   return (
-    <Row>
+    <Flex>
       <Column>
         <label>MIN AMOUNT</label>
         <SymbolInput>
@@ -123,6 +129,6 @@ export const Filters = ({
           }}
         />
       </Column>
-    </Row>
+    </Flex>
   );
 };
