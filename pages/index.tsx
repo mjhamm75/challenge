@@ -1,11 +1,12 @@
-import type { NextPage } from 'next';
-import { useEffect, useState } from 'react';
-import TransactionCard from '../components/TransactionCard';
+import type { NextPage } from "next";
+import { useEffect, useState } from "react";
+import TransactionCard from "../components/TransactionCard";
+import { Filters } from "../components/filters";
 
 const Home: NextPage = () => {
   const [transactions, setTransactions] = useState<any[]>([]);
   const fetchTransactions = async () => {
-    const response = await fetch('/api/transactions');
+    const response = await fetch("/api/transactions");
     const data = await response.json();
     setTransactions(data);
   };
@@ -17,7 +18,8 @@ const Home: NextPage = () => {
   return (
     <div className="w-full h-full">
       <div className="m-10">
-        <h1 className="text-3xl font-semibold">Transactions</h1>
+        <h1 className="text-3xl font-semibold mb-6">Transactions</h1>
+        <Filters />
         <div className="flex flex-col gap-8 mt-10">
           {transactions &&
             transactions.map((transaction: any, index: number) => (
