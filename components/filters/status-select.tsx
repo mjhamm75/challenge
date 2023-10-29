@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { TransactionStatus } from "./state";
 
 const Select = styled.select`
   background-color: lightgrey;
@@ -16,10 +17,10 @@ const Select = styled.select`
 export const StatusSelect = ({
   onSelect,
 }: {
-  onSelect: (value: string) => void;
+  onSelect: (value: TransactionStatus) => void;
 }) => {
   return (
-    <Select onChange={(e) => onSelect(e.target.value)}>
+    <Select onChange={(e) => onSelect(e.target.value as TransactionStatus)}>
       <option></option>
       <option value="pending">pending</option>
       <option value="settled">settled</option>
