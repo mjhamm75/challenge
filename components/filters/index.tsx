@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { StatusSelect } from "./status-select";
 
 const Row = styled.div`
   display: flex;
@@ -41,7 +42,11 @@ export const Filters = () => {
       </Column>
       <Column>
         <label>STATUS</label>
-        <Input aria-label="STATUS" />
+        <StatusSelect
+          onSelect={(value) => {
+            debugger;
+          }}
+        />
       </Column>
       <Column>
         <label>CARD</label>
