@@ -59,11 +59,12 @@ export const selectTransactions = async () => {
 
 export const search = async ({
   status,
-  minimum,
-  maximum,
+  minimumCents,
+  maximumCents,
   merchant,
   cardNumber,
 }: SearchTransaction) => {
+  console.log("HERE", minimumCents, maximumCents);
   return await TransactionTable.findAll({
     where: {
       ...(status && {
@@ -73,14 +74,14 @@ export const search = async ({
       }),
       ...(cardNumber && { cardLast4Digits: { [Op.eq]: cardNumber } }),
       ...(merchant && { merchantName: { [Op.like]: merchant } }),
-      ...(minimum && {
+      ...(minimumCents && {
         amountCents: {
-          [Op.gt]: minimum,
+          [Op.gt]: minimumCents,
         },
       }),
-      ...(maximum && {
+      ...(maximumCents && {
         amountCents: {
-          [Op.lt]: maximum,
+          [Op.lt]: maximumCents,
         },
       }),
     },
