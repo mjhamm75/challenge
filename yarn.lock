@@ -2644,6 +2644,13 @@ graphql-codegen@^0.4.0:
     node-fetch "^1.5.3"
     yargs "^5.0.0"
 
+graphql-scalars@^1.22.4:
+  version "1.22.4"
+  resolved "https://registry.npmjs.org/graphql-scalars/-/graphql-scalars-1.22.4.tgz#af092b142bcfd5c1f8c53cb70ee1955ecd4ddb03"
+  integrity sha512-ILnv7jq5VKHLUyoaTFX7lgYrjCd6vTee9i8/B+D4zJKJT5TguOl0KkpPEbXHjmeor8AZYrVsrYUHdqRBMX1pjA==
+  dependencies:
+    tslib "^2.5.0"
+
 graphql-tag@^2.12.6:
   version "2.12.6"
   resolved "https://registry.npmjs.org/graphql-tag/-/graphql-tag-2.12.6.tgz#d441a569c1d2537ef10ca3d1633b48725329b5f1"

@@ -29,20 +29,12 @@ export const allTransactions = queryField((t) => {
         cardNumber,
       });
 
-      JSON.stringify(
-        {
-          edges: results.map((r) => ({
-            node: r.dataValues,
-          })),
-        },
-        null,
-        2
-      );
+      const edges = results.map((r) => ({
+        node: r.dataValues,
+      }));
 
       return {
-        edges: results.map((r) => ({
-          node: r.dataValues,
-        })),
+        edges,
       };
     },
   });

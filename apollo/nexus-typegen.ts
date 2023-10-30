@@ -6,9 +6,20 @@
 
 import type { HttpContext } from "./../server/context/index"
 import type { core, connectionPluginCore } from "nexus"
-
+declare global {
+  interface NexusGenCustomInputMethods<TypeName extends string> {
+    /**
+     * A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar.
+     */
+    dateTime<FieldName extends string>(fieldName: FieldName, opts?: core.CommonInputFieldConfig<TypeName, FieldName>): void // "DateTime";
+  }
+}
 declare global {
   interface NexusGenCustomOutputMethods<TypeName extends string> {
+    /**
+     * A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar.
+     */
+    dateTime<FieldName extends string>(fieldName: FieldName, ...opts: core.ScalarOutSpread<TypeName, FieldName>): void // "DateTime";
     /**
      * Adds a Relay-style connection to the type, with numerous options for configuration
      *
@@ -39,6 +50,7 @@ export interface NexusGenScalars {
   Float: number
   Boolean: boolean
   ID: string
+  DateTime: any
 }
 
 export interface NexusGenObjects {
@@ -52,12 +64,12 @@ export interface NexusGenObjects {
   Transaction: { // root type
     amountCents: number; // Int!
     cardLast4Digits: string; // String!
-    createdAt: string; // String!
+    createdAt: NexusGenScalars['DateTime']; // DateTime!
     description: string; // String!
     direction: string; // String!
     id: string; // ID!
     merchantName: string; // String!
-    updatedAt: string; // String!
+    updatedAt: NexusGenScalars['DateTime']; // DateTime!
   }
   TransactionConnection: { // root type
     edges?: Array<NexusGenRootTypes['TransactionEdge'] | null> | null; // [TransactionEdge]
@@ -93,13 +105,13 @@ export interface NexusGenFieldTypes {
   Transaction: { // field return type
     amountCents: number; // Int!
     cardLast4Digits: string; // String!
-    createdAt: string; // String!
+    createdAt: NexusGenScalars['DateTime']; // DateTime!
     description: string; // String!
     direction: string; // String!
     id: string; // ID!
     merchantName: string; // String!
     status: NexusGenEnums['TransactionStatus']; // TransactionStatus!
-    updatedAt: string; // String!
+    updatedAt: NexusGenScalars['DateTime']; // DateTime!
   }
   TransactionConnection: { // field return type
     edges: Array<NexusGenRootTypes['TransactionEdge'] | null> | null; // [TransactionEdge]
@@ -125,13 +137,13 @@ export interface NexusGenFieldTypeNames {
   Transaction: { // field return type name
     amountCents: 'Int'
     cardLast4Digits: 'String'
-    createdAt: 'String'
+    createdAt: 'DateTime'
     description: 'String'
     direction: 'String'
     id: 'ID'
     merchantName: 'String'
     status: 'TransactionStatus'
-    updatedAt: 'String'
+    updatedAt: 'DateTime'
   }
   TransactionConnection: { // field return type name
     edges: 'TransactionEdge'

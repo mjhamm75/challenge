@@ -35,9 +35,7 @@ query allTransaction(
 `);
 
 export const useGetTransactions = () => {
-  console.log("Here");
   const { data, loading, error } = useQuery(QUERY);
-  console.log("More", { data, loading, error });
 
   return {
     transactions: data?.allTransactions.edges.map((t) => t.node) ?? [],

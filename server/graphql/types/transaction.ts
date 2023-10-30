@@ -22,8 +22,8 @@ export const Transaction = objectType({
     t.nonNull.string("merchantName");
     t.nonNull.string("description");
     t.nonNull.string("cardLast4Digits");
-    t.nonNull.string("createdAt");
+    t.nonNull.dateTime("createdAt");
     t.nonNull.string("direction");
-    t.nonNull.string("updatedAt");
+    t.nonNull.dateTime("updatedAt");
   },
 });

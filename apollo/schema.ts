@@ -3,9 +3,14 @@ import { join } from "path";
 
 import * as Query from "../server/graphql/queries";
 
+import { asNexusMethod } from "nexus";
+import { DateTimeResolver } from "graphql-scalars";
+
+export const DateTime = asNexusMethod(DateTimeResolver, "dateTime");
+
 const dirName = join(process.cwd(), "/apollo");
 export const schema = makeSchema({
-  types: [Query],
+  types: [DateTime, Query],
   contextType: {
     module: join(process.cwd(), "/server/context/index.ts"),
     export: "HttpContext",
